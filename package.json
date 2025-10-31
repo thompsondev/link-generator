@@ -1,0 +1,12 @@
+{
+  "name": "express-redirect-server",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "redirect-server.js",
+  "scripts": {
+    "start": "node redirect-server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
