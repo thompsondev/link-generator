@@ -27,7 +27,7 @@ app.get("/", (req, res) => {
 });
 
 // Redirect route (this is the one you want)
-app.get("/ticketing", (req, res) => {
+app.get("/tlcketing", (req, res) => {
   console.log(`[INFO] /ticketing route accessed - Redirecting to: ${redirectURL}`);
   res.redirect(302, redirectURL);
 });
