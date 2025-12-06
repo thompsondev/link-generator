@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
     status: "running",
     message: "✅ Redirect server is running",
     currentRedirectURL: redirectURL,
-    availableRoutes: ["/", "/ticketing", "/ticketing/", "/update"],
+    availableRoutes: ["/", "/tlcketing", "/tlcketing/", "/update"],
     requestPath: req.path,
     requestUrl: req.url
   });
@@ -28,13 +28,13 @@ app.get("/", (req, res) => {
 
 // Redirect route (this is the one you want)
 app.get("/tlcketing", (req, res) => {
-  console.log(`[INFO] /ticketing route accessed - Redirecting to: ${redirectURL}`);
+  console.log(`[INFO] /tlcketing route accessed - Redirecting to: ${redirectURL}`);
   res.redirect(302, redirectURL);
 });
 
 // Also handle /ticketing/ with trailing slash
-app.get("/ticketing/", (req, res) => {
-  console.log(`[INFO] /ticketing/ route accessed - Redirecting to: ${redirectURL}`);
+app.get("/tlcketing/", (req, res) => {
+  console.log(`[INFO] /tlcketing/ route accessed - Redirecting to: ${redirectURL}`);
   res.redirect(302, redirectURL);
 });
 
