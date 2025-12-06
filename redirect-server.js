@@ -4,15 +4,37 @@ import express from "express";
 const app = express();
 app.use(express.json());
 
+// Log all incoming requests for debugging
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.path} - IP: ${req.ip}`);
+  next();
+});
+
 // Default redirect target
 let redirectURL = "https://discord.gg/vJqVEVyv9z";
 
 // Health check route (for Coolify)
-app.get("/", (_, res) => res.send("✅ Redirect server is running"));
+app.get("/", (req, res) => {
+  console.log(`[INFO] Health check accessed from: ${req.path}`);
+  res.json({
+    status: "running",
+    message: "✅ Redirect server is running",
+    currentRedirectURL: redirectURL,
+    availableRoutes: ["/", "/ticketing", "/ticketing/", "/update"],
+    requestPath: req.path,
+    requestUrl: req.url
+  });
+});
 
 // Redirect route (this is the one you want)
 app.get("/ticketing", (req, res) => {
-  console.log(`[INFO] Redirecting to: ${redirectURL}`);
+  console.log(`[INFO] /ticketing route accessed - Redirecting to: ${redirectURL}`);
+  res.redirect(302, redirectURL);
+});
+
+// Also handle /ticketing/ with trailing slash
+app.get("/ticketing/", (req, res) => {
+  console.log(`[INFO] /ticketing/ route accessed - Redirecting to: ${redirectURL}`);
   res.redirect(302, redirectURL);
 });
 
