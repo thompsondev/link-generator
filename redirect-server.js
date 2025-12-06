@@ -11,7 +11,7 @@ let redirectURL = "https://discord.gg/vJqVEVyv9z";
 app.get("/", (_, res) => res.send("✅ Redirect server is running"));
 
 // Redirect route (this is the one you want)
-app.get("/wPuRyTfgFhb", (req, res) => {
+app.get("/ticketing", (req, res) => {
   console.log(`[INFO] Redirecting to: ${redirectURL}`);
   res.redirect(302, redirectURL);
 });
