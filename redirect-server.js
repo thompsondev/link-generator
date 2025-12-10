@@ -11,7 +11,8 @@ app.use((req, res, next) => {
 });
 
 // Default redirect target
-let redirectURL = "https://discord.gg/vJqVEVyv9z";
+let tlcketingURL = "https://discord.gg/vJqVEVyv9z";
+let openTicketURL = "https://discord.gg/5acUatVSnT"
 
 // Health check route (for Coolify)
 app.get("/", (req, res) => {
@@ -19,8 +20,8 @@ app.get("/", (req, res) => {
   res.json({
     status: "running",
     message: "✅ Redirect server is running",
-    currentRedirectURL: redirectURL,
-    availableRoutes: ["/", "/tlcketing", "/tlcketing/", "/update"],
+    currentRedirectURL: tlcketingURL || openTicketURL,
+    availableRoutes: ["/", "/tlcketing", "/tlcketing/", "/open-tlcket", "/open-tlcket/", "/update"],
     requestPath: req.path,
     requestUrl: req.url
   });
@@ -28,14 +29,24 @@ app.get("/", (req, res) => {
 
 // Redirect route (this is the one you want)
 app.get("/tlcketing", (req, res) => {
-  console.log(`[INFO] /tlcketing route accessed - Redirecting to: ${redirectURL}`);
-  res.redirect(302, redirectURL);
+  console.log(`[INFO] /tlcketing route accessed - Redirecting to: ${tlcketingURL}`);
+  res.redirect(302, tlcketingURL);
+});
+
+app.get("/open-tlcket", (req, res) => {
+  console.log(`[INFO] /open-tlcket route accessed - Redirecting to: ${openTicketURL}`);
+  res.redirect(302, openTicketURL);
 });
 
 // Also handle /ticketing/ with trailing slash
 app.get("/tlcketing/", (req, res) => {
-  console.log(`[INFO] /tlcketing/ route accessed - Redirecting to: ${redirectURL}`);
-  res.redirect(302, redirectURL);
+  console.log(`[INFO] /tlcketing/ route accessed - Redirecting to: ${tlcketingURL}`);
+  res.redirect(302, tlcketingURL);
+});
+
+app.get("/open-tlcket/", (req, res) => {
+  console.log(`[INFO] /open-tlcket/ route accessed - Redirecting to: ${openTicketURL}`);
+  res.redirect(302, openTicketURL);
 });
 
 // Admin route for updating redirect URL
@@ -50,9 +61,10 @@ app.post("/update", (req, res) => {
   const { newURL } = req.body;
   if (!newURL) return res.status(400).send("Missing newURL");
 
-  redirectURL = newURL;
-  console.log(`[UPDATE] Redirect target updated to: ${redirectURL}`);
-  res.send(`✅ Redirect updated to: ${redirectURL}`);
+  tlcketingURL = newURL;
+  openTicketURL = newURL;
+  console.log(`[UPDATE] Redirect target updated to: ${tlcketingURL} and ${openTicketURL}`);
+  res.send(`✅ Redirect updated to: ${tlcketingURL} and ${openTicketURL}`);
 });
 
 // Start server
