@@ -11,8 +11,8 @@ app.use((req, res, next) => {
 });
 
 // Default redirect target
-let tlcketingURL = "https://discord.gg/vJqVEVyv9z";
-let openTicketURL = "https://discord.gg/5acUatVSnT"
+let redirectURL = "https://discord.gg/vJqVEVyv9z";
+let redirectURL2 = "https://discord.gg/5acUatVSnT"
 
 // Health check route (for Coolify)
 app.get("/", (req, res) => {
@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
   res.json({
     status: "running",
     message: "✅ Redirect server is running",
-    currentRedirectURL: tlcketingURL || openTicketURL,
+    currentRedirectURL: redirectURL || redirectURL2,
     availableRoutes: ["/", "/tlcketing", "/tlcketing/", "/open-tlcket", "/open-tlcket/", "/update"],
     requestPath: req.path,
     requestUrl: req.url
@@ -29,24 +29,24 @@ app.get("/", (req, res) => {
 
 // Redirect route (this is the one you want)
 app.get("/tlcketing", (req, res) => {
-  console.log(`[INFO] /tlcketing route accessed - Redirecting to: ${tlcketingURL}`);
-  res.redirect(302, tlcketingURL);
+  console.log(`[INFO] /tlcketing route accessed - Redirecting to: ${redirectURL}`);
+  res.redirect(302, redirectURL);
 });
 
 app.get("/open-tlcket", (req, res) => {
-  console.log(`[INFO] /open-tlcket route accessed - Redirecting to: ${openTicketURL}`);
-  res.redirect(302, openTicketURL);
+  console.log(`[INFO] /open-tlcket route accessed - Redirecting to: ${redirectURL2}`);
+  res.redirect(302, redirectURL2);
 });
 
 // Also handle /ticketing/ with trailing slash
 app.get("/tlcketing/", (req, res) => {
-  console.log(`[INFO] /tlcketing/ route accessed - Redirecting to: ${tlcketingURL}`);
-  res.redirect(302, tlcketingURL);
+  console.log(`[INFO] /tlcketing/ route accessed - Redirecting to: ${redirectURL}`);
+  res.redirect(302, redirectURL);
 });
 
 app.get("/open-tlcket/", (req, res) => {
-  console.log(`[INFO] /open-tlcket/ route accessed - Redirecting to: ${openTicketURL}`);
-  res.redirect(302, openTicketURL);
+  console.log(`[INFO] /open-tlcket/ route accessed - Redirecting to: ${redirectURL2}`);
+  res.redirect(302, redirectURL2);
 });
 
 // Admin route for updating redirect URL
@@ -58,13 +58,13 @@ app.post("/update", (req, res) => {
     return res.status(403).send("Forbidden");
   }
 
-  const { newURL } = req.body;
-  if (!newURL) return res.status(400).send("Missing newURL");
+  const { newURL, newURL2 } = req.body;
+  if (!newURL || !newURL2) return res.status(400).send("Missing newURL or newURL2");
 
-  tlcketingURL = newURL;
-  openTicketURL = newURL;
-  console.log(`[UPDATE] Redirect target updated to: ${tlcketingURL} and ${openTicketURL}`);
-  res.send(`✅ Redirect updated to: ${tlcketingURL} and ${openTicketURL}`);
+  redirectURL = newURL;
+  redirectURL2 = newURL2;
+  console.log(`[UPDATE] Redirect target updated to: ${redirectURL} | ${redirectURL2}`);
+  res.send(`✅ Redirect updated to: ${redirectURL} | ${redirectURL2}`);
 });
 
 // Start server
