@@ -4,21 +4,25 @@ A simple Express.js server that provides dynamic URL redirection with an admin A
 
 ## Features
 
-- 🔄 Dynamic redirect endpoint at `/ticketing`
-- 🔐 Admin API to update redirect URL without redeployment
-- 🏥 Health check endpoint for monitoring
-- 📊 Request logging for debugging
-- 🐳 Dockerized for easy deployment
+- 🔄 **Single redirect**: `/ticketing` → `https://discord.gg/53ESJhfGZ`
+- 📄 **GitHub Pages**: Professional “Ask Supp0rt Below” landing in `docs/`
+- 🔐 Admin API to update redirect URL without redeployment (optional)
+- 🏥 Health check endpoint for Coolify
+- 🐳 Dockerized for Coolify deployment
 
 ## Project Structure
 
 ```
 link-generator/
-├── redirect-server.js    # Main server file
+├── redirect-server.js    # Main server (single redirect: Discord)
 ├── package.json          # Node.js dependencies
 ├── Dockerfile            # Docker configuration
 ├── .dockerignore         # Docker ignore file
-└── README.md            # This file
+├── README.md             # This file
+└── docs/                 # GitHub Pages — public "Ask Supp0rt" landing
+    ├── index.html
+    ├── styles.css
+    └── .nojekyll
 ```
 
 ## Local Development
@@ -53,6 +57,22 @@ link-generator/
 - Health check: `http://localhost:3000/`
 - Redirect endpoint: `http://localhost:3000/ticketing`
 - Update redirect URL: `POST http://localhost:3000/update`
+
+## GitHub Pages (public “Ask Supp0rt” link)
+
+The landing page lives in `docs/`. To see the **page** (not just a doc file):
+
+1. **Repo → Settings → Pages**
+2. **Source**: Deploy from a branch  
+3. **Branch**: `main`  
+4. **Folder**: **`/docs`** (must be **docs**, not root)  
+5. Save and wait 1–2 minutes.
+
+Then open: **`https://<your-username>.github.io/link-generator/`**  
+(Use your real GitHub username and repo name.)
+
+You should see “Ask Supp0rt Below 👇 🎫” and the **Open support (Discord)** button.  
+If you still see only a doc, double-check that **Folder** is **/docs** and you’re visiting the URL above (not the repo’s “Code” or “README” tab).
 
 ## Deployment to Coolify
 
