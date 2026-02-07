@@ -64,7 +64,7 @@ The landing page lives in `docs/`. To see the **page** (not just a doc file):
 
 1. **Repo → Settings → Pages**
 2. **Source**: Deploy from a branch  
-3. **Branch**: `main`  
+3. **Branch**: Choose the branch where your code lives (e.g. `master`, `main` — this repo may not use `main`)  
 4. **Folder**: **`/docs`** (must be **docs**, not root)  
 5. Save and wait 1–2 minutes.
 
@@ -72,7 +72,7 @@ Then open: **`https://<your-username>.github.io/link-generator/`**
 (Use your real GitHub username and repo name.)
 
 You should see “Ask Supp0rt Below 👇 🎫” and the **Open support (Discord)** button.  
-If you still see only a doc, double-check that **Folder** is **/docs** and you’re visiting the URL above (not the repo’s “Code” or “README” tab).
+If you still see only a doc, double-check that **Branch** (the one with the `docs/` folder) and **Folder** is **/docs**, and you’re visiting the github.io URL (not the repo’s “Code” or “README” tab).
 
 ## Deployment to Coolify
 

@@ -31,11 +31,17 @@ body {
 }
 
 .title {
-  margin: 0 0 1.25rem;
+  margin: 0 0 0.5rem;
   font-size: 1.35rem;
   font-weight: 600;
   letter-spacing: 0.02em;
   color: #a9b1d6;
+}
+
+.redirect-msg {
+  margin: 0 0 1.25rem;
+  font-size: 0.95rem;
+  color: #565f89;
 }
 
 /* Stylized link (Ask Supp0rt style — broken up, decorative) */
