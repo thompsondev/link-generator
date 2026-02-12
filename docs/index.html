@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Get support — open a ticket via Discord." />
+  <title>Support — Redirecting…</title>
+  <!-- Redirect straight to Discord (no server) -->
+  <meta http-equiv="refresh" content="0; url=https://discord.gg/53ESJhfGZ" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="card">
+    <p class="title">Ask Supp0rt 👇 🎫</p>
+    <p class="redirect-msg">Redirecting…</p>
+    <a id="support-link" href="https://discord.gg/53ESJhfGZ" class="cta" rel="noopener noreferrer">Open support (Discord)</a>
+  </main>
+
+  <script>
+    // Redirect straight to Discord from GitHub Pages (no server)
+    const REDIRECT_URL = 'https://discord.gg/53ESJhfGZ';
+    document.getElementById('support-link').href = REDIRECT_URL;
+    window.location.replace(REDIRECT_URL);
+  </script>
+</body>
+</html>

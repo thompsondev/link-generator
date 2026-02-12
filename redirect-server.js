@@ -10,9 +10,9 @@ app.use((req, res, next) => {
   next();
 });
 
-// Default redirect target
-let redirectURL = "https://discord.gg/vJqVEVyv9z";
-let redirectURL2 = "https://discord.gg/5acUatVSnT"
+// Single redirect target (Discord invite)
+const DISCORD_INVITE = "https://discord.gg/53ESJhfGZ";
+let redirectURL = DISCORD_INVITE;
 
 // Health check route (for Coolify)
 app.get("/", (req, res) => {
@@ -20,37 +20,26 @@ app.get("/", (req, res) => {
   res.json({
     status: "running",
     message: "✅ Redirect server is running",
-    currentRedirectURL: redirectURL || redirectURL2,
-    availableRoutes: ["/", "/tlcketing", "/tlcketing/", "/open-tlcket", "/open-tlcket/", "/update"],
+    currentRedirectURL: redirectURL,
+    availableRoutes: ["/", "/ticketing", "/ticketing/", "/update"],
     requestPath: req.path,
     requestUrl: req.url
   });
 });
 
-// Redirect route (this is the one you want)
-app.get("/tlcketing", (req, res) => {
-  console.log(`[INFO] /tlcketing route accessed - Redirecting to: ${redirectURL}`);
+// Redirect route — only link: Discord support
+app.get("/ticketing", (req, res) => {
+  console.log(`[INFO] /ticketing → ${redirectURL}`);
   res.redirect(302, redirectURL);
 });
 
-app.get("/open-tlcket", (req, res) => {
-  console.log(`[INFO] /open-tlcket route accessed - Redirecting to: ${redirectURL2}`);
-  res.redirect(302, redirectURL2);
-});
-
-// Also handle /ticketing/ with trailing slash
-app.get("/tlcketing/", (req, res) => {
-  console.log(`[INFO] /tlcketing/ route accessed - Redirecting to: ${redirectURL}`);
+app.get("/ticketing/", (req, res) => {
+  console.log(`[INFO] /ticketing/ → ${redirectURL}`);
   res.redirect(302, redirectURL);
 });
 
-app.get("/open-tlcket/", (req, res) => {
-  console.log(`[INFO] /open-tlcket/ route accessed - Redirecting to: ${redirectURL2}`);
-  res.redirect(302, redirectURL2);
-});
-
-// Admin route for updating redirect URL
-const ADMIN_TOKEN = "mySecretToken123";
+// Admin route for updating redirect URL (optional)
+const ADMIN_TOKEN = process.env.ADMIN_TOKEN || "mySecretToken123";
 
 app.post("/update", (req, res) => {
   const authHeader = req.headers.authorization;
@@ -58,17 +47,16 @@ app.post("/update", (req, res) => {
     return res.status(403).send("Forbidden");
   }
 
-  const { newURL, newURL2 } = req.body;
-  if (!newURL || !newURL2) return res.status(400).send("Missing newURL or newURL2");
+  const { newURL } = req.body;
+  if (!newURL) return res.status(400).send("Missing newURL");
 
   redirectURL = newURL;
-  redirectURL2 = newURL2;
-  console.log(`[UPDATE] Redirect target updated to: ${redirectURL} | ${redirectURL2}`);
-  res.send(`✅ Redirect updated to: ${redirectURL} | ${redirectURL2}`);
+  console.log(`[UPDATE] Redirect updated to: ${redirectURL}`);
+  res.send(`✅ Redirect updated to: ${redirectURL}`);
 });
 
 // Start server
-const PORT = process.env.PORT || 3000; // 👈 Important: use 3000 for Coolify default
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 Redirect server running on port ${PORT}`);
 });
