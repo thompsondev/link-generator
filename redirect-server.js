@@ -11,7 +11,7 @@ app.use((req, res, next) => {
 });
 
 // Single redirect target (Discord invite)
-const DISCORD_INVITE = "https://discord.gg/53ESJhfGZ";
+const DISCORD_INVITE = "https://discord.gg/svYxpsswAk";
 let redirectURL = DISCORD_INVITE;
 
 // Health check route (for Coolify)
@@ -21,22 +21,49 @@ app.get("/", (req, res) => {
     status: "running",
     message: "✅ Redirect server is running",
     currentRedirectURL: redirectURL,
-    availableRoutes: ["/", "/ticketing", "/ticketing/", "/update"],
+    availableRoutes: ["/", "/techsupp0rt", "/tlcketing", "/update","/feedback","/instantenquire", "/technicaiSupport","/technicaInquiry"],
     requestPath: req.path,
     requestUrl: req.url
   });
 });
 
-// Redirect route — only link: Discord support
-app.get("/ticketing", (req, res) => {
-  console.log(`[INFO] /ticketing → ${redirectURL}`);
+// Redirect route — only link: Discord support,
+app.get("/techsupp0rt", (req, res) => {
+  console.log(`[INFO] /techsupp0rt → ${redirectURL}`);
   res.redirect(302, redirectURL);
 });
 
-app.get("/ticketing/", (req, res) => {
-  console.log(`[INFO] /ticketing/ → ${redirectURL}`);
+app.get("/tlcketing", (req, res) => {
+  console.log(`[INFO] /tlcketing → ${redirectURL}`);
   res.redirect(302, redirectURL);
 });
+
+app.get("/feedback", (req, res) => {
+  console.log(`[INFO] /feedback → ${redirectURL}`);
+  res.redirect(302, redirectURL);
+});
+
+app.get("/updates", (req, res) => {
+  console.log(`[INFO] /update → ${redirectURL}`);
+  res.redirect(302, redirectURL);
+});
+
+app.get("/instantenquire", (req, res) => {
+  console.log(`[INFO] /instantenquire → ${redirectURL}`);
+  res.redirect(302, redirectURL);
+});
+
+app.get("/technicaSupport", (req, res) => {
+  console.log(`[INFO] /technicaSupport → ${redirectURL}`);
+  res.redirect(302, redirectURL);
+});
+
+app.get("/technicaInquiry", (req, res) => {
+  console.log(`[INFO] /technicaInquiry → ${redirectURL}`);
+  res.redirect(302, redirectURL);
+});
+
+
 
 // Admin route for updating redirect URL (optional)
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN || "mySecretToken123";
